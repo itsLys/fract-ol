@@ -1,0 +1,5 @@
+- Map the grid of pixels into acomplet plane
+- Scale the complex place to fit the screen (-2, 1 on x & -1.5, 1.5 on Y etc)
+- RELINKING see how to remove it
+- Color shifting
+- CMD Arguments
