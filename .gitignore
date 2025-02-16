@@ -3,3 +3,5 @@ obj
 *.a
 *.out
 compile_flags.txt
+fractol
+main.c
