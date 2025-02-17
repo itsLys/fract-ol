@@ -30,13 +30,14 @@ void render_burningship(t_data *data);
 void handle_move(int code, t_data *data);
 int handle_motion(int x, int y, t_data *data);
 int handle_keypress(int code, t_data *data);
-void handle_zoom(int code, t_data *data);
+void handle_zoom_and_iterations(int code, t_data *data);
 void reset_defaults(t_data *data); // resets color, zoom, shift, iterations;
 void change_color(t_data *data);
 void change_fractal(int code, t_data *data);
 int handle_button(int code, int x, int y, t_data *data);
 void toggle_mouse_param(t_data *data);
 void handle_color_shift(int code, t_data *data);
+
 
 // rendering
 void img_put_pixel(t_data *data, int x, int y, int color);

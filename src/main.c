@@ -1,6 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/17 21:55:40 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/17 22:36:20 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "fractol.h"
-#include <stdio.h>
-#include <string.h>
 
 int exit_program(t_data *data)
 {
@@ -12,15 +21,13 @@ int exit_program(t_data *data)
 		mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	free(data);
-	exit (1);
+	exit (FAILIURE);
 }
 
-void init_members(t_data *data)
+static void init_members(t_data *data)
 {
 	data->shift.im = 0;
 	data->shift.re = 0;
-	// data->mouse_pos.re = 0;
-	// data->mouse_pos.im = 0;
 	data->scale = 1;
 	data->iter = BASE_ITER;
 	data->fractal = 'b';
@@ -31,7 +38,7 @@ void init_members(t_data *data)
 	data->color_shift = 0;
 }
 
-t_data *init_data(void)
+static t_data *init_data(void)
 {
 	static t_data *data;
 
@@ -53,7 +60,7 @@ t_data *init_data(void)
 	return data;
 }
 
-void setup_hooks(t_data *data)
+static void setup_hooks(t_data *data)
 {
 	mlx_hook(data->win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->win, DestroyNotify, NoEventMask, &exit_program, data);
@@ -61,13 +68,11 @@ void setup_hooks(t_data *data)
 	mlx_hook(data->win, ButtonPress, ButtonPressMask, &handle_button, data);
 }
 
-void render(t_data *data)
+static void render(t_data *data)
 {
 	mlx_loop_hook(data->mlx, &render_img, data);
 	mlx_loop(data->mlx);
 }
-
-
 
 int main(int ac, char **av)
 {
@@ -75,20 +80,7 @@ int main(int ac, char **av)
 
 	data = init_data();
 	if (parse_args(ac, av, data) == FAILIURE)
-	{
-		ft_printf("Error: Invalid Input\n");
-		ft_printf("Usage\n./fractol <fractal_name> [parameters]\n");
-		ft_printf("Available fractals:\n");
-		ft_printf("\tmandelbrot:\t\t\tNo parameters required\n");
-		ft_printf("\tburningship:\t\tNo parameters required\n");
-		ft_printf("\textra:\t\t\t\tNo parameters required\n");
-		ft_printf("\tjulia <Re> <Im>:\tRequires two floating-point numbers\n");
-		ft_printf("Examples:\n");
-		ft_printf("\t\t./fractol mandelbrot\n");
-		ft_printf("\t\t./fractol burningship\n");
-		ft_printf("\t\t./fractol julia -0.8 0.156\n");
 		exit_program(data);
-	}
 	setup_hooks(data);
 	render(data);
 	return 0;

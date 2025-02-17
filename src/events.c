@@ -1,8 +1,4 @@
-#include "defs.h"
 #include "fractol.h"
-#include <stdio.h>
-
-
 
 int handle_motion(int x, int y, t_data *data)
 {
@@ -18,9 +14,9 @@ int handle_keypress(int code, t_data *data)
 		|| code == XK_Down)
 		handle_move(code, data);
 	else if (code == XK_minus || code == XK_equal)
-		handle_zoom(code, data);
+		handle_zoom_and_iterations(code, data);
 	else if (code == XK_space)
-		reset_defaults(data); // resets color, zoom, shift, iterations;
+		reset_defaults(data);
 	else if (code == XK_c)
 		change_color(data);
 	else if (code == XK_j || code == XK_m || code == XK_n || code == XK_e || code == XK_b)
@@ -39,7 +35,7 @@ int handle_button(int code, int x, int y, t_data *data)
 	(void) x;
 	(void) y;
 	if (code == 4 || code == 5)
-		handle_zoom(code, data);
+		handle_zoom_and_iterations(code, data);
 	return 0;
 }
 

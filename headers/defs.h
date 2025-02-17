@@ -66,6 +66,7 @@ typedef struct s_data
 	int *color_table;
 	int fractal;
 	t_complex mouse_pos;
+	t_complex default_julia_params;
 	t_complex julia_params;
 	int toggle_mouse_param;
 	t_complex range[2];

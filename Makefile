@@ -5,6 +5,7 @@ RESET  =	\033[0m
 
 NAME =		fractol
 CC =		cc
+FLAGS =		-Wall -Wextra -Werror -lmlx -lXext -lX11 -lm -Ofast
 AR =		ar rcs
 INCLUDES =	-I./headers/ -I./libft/headers/
 LIBFT =		libft.a
@@ -15,12 +16,13 @@ SRC =		main.c \
 			mandelbrot.c \
 			burningship.c \
 			events.c \
-			key_hooks.c \
 			color.c \
+			color_utils.c \
 			draw.c \
 			complex.c \
-			parser.c 
-
+			parser.c \
+			navigation_hooks.c \
+			options_hooks.c
 SRC_DIR =	src
 OBJ_DIR =	obj
 OBJ =		$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -28,14 +30,14 @@ OBJ =		$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) -lmlx -lXext -lX11 -lm -lz $(INCLUDES) -Ofast
+	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) $(FLAGS) $(INCLUDES)
 	@echo "$(GREEN)$(BOLD)$(NAME) done!$(RESET)"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@echo "	$(YELLOW) compiling $<$(RESET)"
-	@$(CC) -c $< $(INCLUDES) -o $@
+	@echo "$(YELLOW)compiling $<$(RESET)"
+	@$(CC) -c $< $(INCLUDES) $(FLAGS) -o $@
 
 $(LIBFT):
 	@make -C libft/ re
