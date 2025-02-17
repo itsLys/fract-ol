@@ -1,5 +1,6 @@
 #include "fractol.h"
 
+
 inline static int check_point(t_complex c, t_complex z, t_data *data)
 {
 	t_complex	tmp;
@@ -23,8 +24,8 @@ void render_julia(t_data *data)
 	int			iter;
 	double index;
 
-	data->range[0] = (t_complex) {-2.0, -2};
-	data->range[1] = (t_complex) {2, 2};
+	data->range[0] = (t_complex) {-2.0, -2.0};
+	data->range[1] = (t_complex) {2.0, 2.0};
 	p.y = 0;
 	while (p.y < WIN_WIDTH)
 	{

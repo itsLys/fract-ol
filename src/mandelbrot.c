@@ -12,7 +12,7 @@ inline static int check_point(t_complex c, t_data *data)
 	while (z.re * z.re + z.im * z.im <= 4.0 && i < data->iter)
 	{
 		tmp.re = z.re * z.re - z.im * z.im + c.re;
-		tmp.im = 2 * z.re * z.im + c.re * -c.im;
+		tmp.im = 2 * z.re * z.im + c.im;
 		z = tmp;
 		i++;
 	}
