@@ -6,10 +6,11 @@
 /*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:55:40 by ihajji            #+#    #+#             */
-/*   Updated: 2025/02/17 22:36:20 by ihajji           ###   ########.fr       */
+/*   Updated: 2025/02/17 22:50:15 by ihajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
+#include <stdlib.h>
 
 int exit_program(t_data *data)
 {
@@ -19,6 +20,8 @@ int exit_program(t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
 		mlx_destroy_display(data->mlx);
+	if (data->color_table)
+		free(data->color_table);
 	free(data->mlx);
 	free(data);
 	exit (FAILIURE);
@@ -30,10 +33,10 @@ static void init_members(t_data *data)
 	data->shift.re = 0;
 	data->scale = 1;
 	data->iter = BASE_ITER;
-	data->fractal = 'b';
 	data->color = GRAYSCALE;
 	data->color_table = init_colors(data->color, data);
-	data->julia_params = (t_complex) {-0.5, 0.5};
+	data->default_julia_params = (t_complex) {-0.5, 0.5};
+	data->julia_params = data->default_julia_params;
 	data->toggle_mouse_param = 0;
 	data->color_shift = 0;
 }
@@ -57,7 +60,7 @@ static t_data *init_data(void)
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp,
 									&data->img.line_len, &data->img.endian);
 	init_members(data);
-	return data;
+	return (data);
 }
 
 static void setup_hooks(t_data *data)
@@ -83,5 +86,5 @@ int main(int ac, char **av)
 		exit_program(data);
 	setup_hooks(data);
 	render(data);
-	return 0;
+	return (0);
 }

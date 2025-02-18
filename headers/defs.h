@@ -10,12 +10,6 @@
 #define WIN_HEIGHT 800
 #define WIN_WIDTH 800
 
-#define RE_MIN -2.0
-#define RE_MAX 1.0
-
-#define IM_MIN -1.5
-#define IM_MAX 1.5
-
 #define TABLE_SIZE 65536
 #define PALETTE_SIZE 7
 #define COLOR_SHIFT_STEP 250

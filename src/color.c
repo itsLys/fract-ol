@@ -2,15 +2,11 @@
 #include "color.h"
 
 
-static int get_color(int iter, int set, t_data *data)
+static int get_color(int iter, int set, int *palette)
 {
-	int *palette;
 	double t;
 	double index;
 
-	palette = malloc(PALETTE_SIZE * sizeof(int));
-	if (palette == NULL)
-		exit_program(data);
 	if (set == FIRE)
 		set_fire(palette);
 	else if (set == RAINBOW)
@@ -26,18 +22,27 @@ static int get_color(int iter, int set, t_data *data)
 
 int *init_colors(int set, t_data *data)
 {
+	int *palette;
 	int *table;
 	int i;
+	int index;
 	int shift;
 
 	i = 0;
-	table = malloc(TABLE_SIZE * 4);
+	palette = malloc(PALETTE_SIZE * sizeof(int));
+	table = malloc(TABLE_SIZE * sizeof(int));
+	if (palette == NULL || table == NULL)
+		exit_program(data);
 	shift = COLOR_SHIFT_STEP * data->color_shift;
 	while (i < TABLE_SIZE)
 	{
-		table[i] = get_color(i + shift, set, data);
+		if (i + shift >= TABLE_SIZE)
+			index = TABLE_SIZE - (i + shift);
+		else 
+			index = i + shift;
+		table[i] = get_color(index, set, palette);
 		i++;
 	}
-	return table;
+	free(palette);
+	return (table);
 }
-

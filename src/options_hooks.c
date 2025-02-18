@@ -5,7 +5,6 @@ void  reset_defaults(t_data *data)
 	data->shift.re = 0;
 	data->shift.im = 0;
 	data->scale = 1;
-	data->color = 1;
 	data->iter = BASE_ITER;
 	data->julia_params = data->default_julia_params;
 }

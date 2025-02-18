@@ -22,7 +22,7 @@ int get_gradient(int s, int e, float t)
 	r = r_start + (r_end  - r_start) * t;
 	g = g_start + (g_end  - g_start) * t;
 	b = b_start + (b_end  - b_start) * t;
-	return (r << 16) | (g << 8) | b;
+	return ((r << 16) | (g << 8) | b);
 }
 void set_fire(int *palette)
 {

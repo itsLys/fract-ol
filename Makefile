@@ -5,7 +5,8 @@ RESET  =	\033[0m
 
 NAME =		fractol
 CC =		cc
-FLAGS =		-Wall -Wextra -Werror -lmlx -lXext -lX11 -lm -Ofast
+FLAGS =		-Wall -Wextra -Werror -lmlx -lXext -lX11 -lm -Ofast -ggdb 
+# remove ggdb
 AR =		ar rcs
 INCLUDES =	-I./headers/ -I./libft/headers/
 LIBFT =		libft.a
@@ -19,7 +20,6 @@ SRC =		main.c \
 			color.c \
 			color_utils.c \
 			draw.c \
-			complex.c \
 			parser.c \
 			navigation_hooks.c \
 			options_hooks.c

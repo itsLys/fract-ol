@@ -1,5 +1,16 @@
 #include "fractol.h"
 
+inline static t_complex map_pixel(t_point p, t_data *data)
+{
+	t_complex	c;
+
+	c.re = ((data->range[0].re + (p.x * ((data->range[1].re - data->range[0].re) / WIN_WIDTH)))
+		* data->scale) + (data->shift.re);
+	c.im = ((data->range[0].im + (p.y * ((data->range[1].im - data->range[0].im) / WIN_HEIGHT)))
+		* data->scale) + (data->shift.im);
+	return ((t_complex) c);
+}
+
 inline static int check_point(t_complex c, t_data *data)
 {
 	t_complex	z;
@@ -16,7 +27,7 @@ inline static int check_point(t_complex c, t_data *data)
 		z = tmp;
 		i++;
 	}
-	return i;
+	return (i);
 }
 
 void render_mandelbrot(t_data *data)

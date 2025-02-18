@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/17 22:56:13 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/17 22:56:17 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -16,8 +28,8 @@
 
 
 int exit_program(t_data *data);
-//utils
-t_complex map_pixel(t_point p, t_data *data);
+// //utils
+// t_complex map_pixel(t_point p, t_data *data);
 
 // fractals
 void render_mandelbrot(t_data *data);

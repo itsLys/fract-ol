@@ -1,11 +1,22 @@
 #include "fractol.h"
 
+inline static t_complex map_pixel(t_point p, t_data *data)
+{
+	t_complex	c;
+
+	c.re = ((data->range[0].re + (p.x * ((data->range[1].re - data->range[0].re) / WIN_WIDTH)))
+		* data->scale) + (data->shift.re);
+	c.im = ((data->range[0].im + (p.y * ((data->range[1].im - data->range[0].im) / WIN_HEIGHT)))
+		* data->scale) + (data->shift.im);
+	return ((t_complex) c);
+}
+
 int handle_motion(int x, int y, t_data *data)
 {
 	data->mouse_pos = map_pixel((t_point) {x, y}, data);
 	if (data->toggle_mouse_param)
 		data->julia_params = data->mouse_pos;
-	return 0;
+	return (0);
 }
 
 int handle_keypress(int code, t_data *data)
@@ -36,6 +47,6 @@ int handle_button(int code, int x, int y, t_data *data)
 	(void) y;
 	if (code == 4 || code == 5)
 		handle_zoom_and_iterations(code, data);
-	return 0;
+	return (0);
 }
 
