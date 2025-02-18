@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 11:18:38 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/18 11:18:38 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-void img_put_pixel(t_data *data, int x, int y, int color)
+void	img_put_pixel(t_data *data, int x, int y, int color)
 {
-	char *pixel;
-	t_img *img;
+	char	*pixel;
+	t_img	*img;
 
 	img = &(data->img);
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(int *) pixel = color;
+	*(int *)pixel = color;
 }
 
-int render_img(t_data *data)
+int	render_img(t_data *data)
 {
 	if (data->win == NULL)
 		return (1);

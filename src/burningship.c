@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   burningship.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 11:13:22 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/18 11:13:58 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-inline static t_complex map_pixel(t_point p, t_data *data)
+inline static	t_complex	map_pixel(t_point p, t_data *data)
 {
 	t_complex	c;
 
-	c.re = ((data->range[0].re + (p.x * ((data->range[1].re - data->range[0].re) / WIN_WIDTH)))
-		* data->scale) + (data->shift.re);
-	c.im = ((data->range[0].im + (p.y * ((data->range[1].im - data->range[0].im) / WIN_HEIGHT)))
-		* data->scale) + (data->shift.im);
+	c.re = ((data->range[0].re + (p.x
+					* ((data->range[1].re - data->range[0].re) / WIN_WIDTH)))
+			* data->scale) + (data->shift.re);
+	c.im = ((data->range[0].im + (p.y
+					* ((data->range[1].im - data->range[0].im) / WIN_HEIGHT)))
+			* data->scale) + (data->shift.im);
 	return ((t_complex) c);
 }
 
@@ -22,7 +36,7 @@ inline static int	check_point(t_complex c, t_data *data)
 	i = 0;
 	while (z.re * z.re + z.im * z.im <= 4.0 && i < data->iter)
 	{
-		tmp.re = z.re * z.re - z.im * z.im  + c.re;
+		tmp.re = z.re * z.re - z.im * z.im + c.re;
 		tmp.im = fabs(z.re) * fabs(z.im) * 2 + c.im;
 		z = tmp;
 		i++;
@@ -37,8 +51,8 @@ void	render_burningship(t_data *data)
 	int			iter;
 	double		index;
 
-	data->range[0] = (t_complex) {-2.0, -2};
-	data->range[1] = (t_complex) {2, 2};
+	data->range[0] = (t_complex){-2.0, -2};
+	data->range[1] = (t_complex){2, 2};
 	p.y = 0;
 	while (p.y < WIN_WIDTH)
 	{

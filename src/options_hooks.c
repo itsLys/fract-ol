@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   options_hooks.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 10:49:24 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/18 10:49:30 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-void  reset_defaults(t_data *data)
+void	reset_defaults(t_data *data)
 {
 	data->shift.re = 0;
 	data->shift.im = 0;
@@ -9,7 +21,7 @@ void  reset_defaults(t_data *data)
 	data->julia_params = data->default_julia_params;
 }
 
-void change_fractal(int code, t_data *data)
+void	change_fractal(int code, t_data *data)
 {
 	if (code == XK_m)
 		data->fractal = 'm';
@@ -23,7 +35,7 @@ void change_fractal(int code, t_data *data)
 		data->fractal = 'b';
 }
 
-void toggle_mouse_param(t_data *data)
+void	toggle_mouse_param(t_data *data)
 {
 	if (data->toggle_mouse_param)
 		data->toggle_mouse_param = 0;
@@ -31,7 +43,7 @@ void toggle_mouse_param(t_data *data)
 		data->toggle_mouse_param = 1;
 }
 
-void handle_color_shift(int code, t_data *data)
+void	handle_color_shift(int code, t_data *data)
 {
 	if (code == XK_r)
 	{
@@ -51,7 +63,7 @@ void handle_color_shift(int code, t_data *data)
 	data->color_table = init_colors(data->color, data);
 }
 
-void change_color(t_data *data)
+void	change_color(t_data *data)
 {
 	if (data->color == 3)
 		data->color = 0;

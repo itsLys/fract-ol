@@ -1,30 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 10:36:46 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/18 10:44:05 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "color.h"
 
-int get_gradient(int s, int e, float t)
+int	get_gradient(int s, int e, float t)
 {
-	int r;
-	int g;
-	int b;
-	int r_start;
-	int g_start;
-	int b_start;
-	int r_end;
-	int g_end;
-	int b_end;
+	t_rgb	rgb;
 
 	t = pow(t, 1.5);
-	r_start = (s >> 16) & 0xFF;
-	r_end = (e >> 16) & 0xFF;
-	g_start = (s >> 8) & 0xFF;
-	g_end = (e >> 8) & 0xFF;
-	b_start = s & 0xFF;
-	b_end = e & 0xFF;
-	r = r_start + (r_end  - r_start) * t;
-	g = g_start + (g_end  - g_start) * t;
-	b = b_start + (b_end  - b_start) * t;
-	return ((r << 16) | (g << 8) | b);
+	rgb.r_start = (s >> 16) & 0xFF;
+	rgb.r_end = (e >> 16) & 0xFF;
+	rgb.g_start = (s >> 8) & 0xFF;
+	rgb.g_end = (e >> 8) & 0xFF;
+	rgb.b_start = s & 0xFF;
+	rgb.b_end = e & 0xFF;
+	rgb.r = rgb.r_start + (rgb.r_end - rgb.r_start) * t;
+	rgb.g = rgb.g_start + (rgb.g_end - rgb.g_start) * t;
+	rgb.b = rgb.b_start + (rgb.b_end - rgb.b_start) * t;
+	return ((rgb.r << 16) | (rgb.g << 8) | rgb.b);
 }
-void set_fire(int *palette)
+
+void	set_fire(int *palette)
 {
 	palette[0] = 0x00000000;
 	palette[1] = 0x00FF0000;
@@ -34,7 +38,8 @@ void set_fire(int *palette)
 	palette[5] = 0x00FF0000;
 	palette[6] = 0x00000000;
 }
-void set_rainbow(int *palette)
+
+void	set_rainbow(int *palette)
 {
 	palette[0] = 0x00FF0000;
 	palette[1] = 0x00FFFF00;
@@ -45,7 +50,7 @@ void set_rainbow(int *palette)
 	palette[6] = 0x00FF0000;
 }
 
-void set_hotncold(int *palette)
+void	set_hotncold(int *palette)
 {
 	palette[0] = 0x00FFFFFF;
 	palette[1] = 0x000066FF;
@@ -56,7 +61,7 @@ void set_hotncold(int *palette)
 	palette[6] = 0x00FFFFFF;
 }
 
-void set_grayscale(int *palette)
+void	set_grayscale(int *palette)
 {
 	palette[0] = 0x00000000;
 	palette[1] = 0x00555555;

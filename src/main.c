@@ -6,13 +6,12 @@
 /*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:55:40 by ihajji            #+#    #+#             */
-/*   Updated: 2025/02/17 22:50:15 by ihajji           ###   ########.fr       */
+/*   Updated: 2025/02/18 11:18:14 by ihajji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
-#include <stdlib.h>
 
-int exit_program(t_data *data)
+int	exit_program(t_data *data)
 {
 	if (data->img.img)
 		mlx_destroy_image(data->mlx, data->img.img);
@@ -27,7 +26,7 @@ int exit_program(t_data *data)
 	exit (FAILIURE);
 }
 
-static void init_members(t_data *data)
+static void	init_members(t_data *data)
 {
 	data->shift.im = 0;
 	data->shift.re = 0;
@@ -35,15 +34,15 @@ static void init_members(t_data *data)
 	data->iter = BASE_ITER;
 	data->color = GRAYSCALE;
 	data->color_table = init_colors(data->color, data);
-	data->default_julia_params = (t_complex) {-0.5, 0.5};
+	data->default_julia_params = (t_complex){-0.5, 0.5};
 	data->julia_params = data->default_julia_params;
 	data->toggle_mouse_param = 0;
 	data->color_shift = 0;
 }
 
-static t_data *init_data(void)
+static t_data	*init_data(void)
 {
-	static t_data *data;
+	static t_data	*data;
 
 	data = ft_calloc(sizeof(t_data), 1);
 	if (data == NULL)
@@ -58,33 +57,28 @@ static t_data *init_data(void)
 	if (data->img.img == NULL)
 		exit_program(data);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bpp,
-									&data->img.line_len, &data->img.endian);
+			&data->img.line_len, &data->img.endian);
 	init_members(data);
 	return (data);
 }
 
-static void setup_hooks(t_data *data)
+static void	setup_hooks_and_render(t_data *data)
 {
 	mlx_hook(data->win, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->win, DestroyNotify, NoEventMask, &exit_program, data);
 	mlx_hook(data->win, MotionNotify, PointerMotionMask, &handle_motion, data);
 	mlx_hook(data->win, ButtonPress, ButtonPressMask, &handle_button, data);
-}
-
-static void render(t_data *data)
-{
 	mlx_loop_hook(data->mlx, &render_img, data);
 	mlx_loop(data->mlx);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = init_data();
 	if (parse_args(ac, av, data) == FAILIURE)
 		exit_program(data);
-	setup_hooks(data);
-	render(data);
+	setup_hooks_and_render(data);
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihajji <ihajji@student.1337.ma>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/18 10:33:40 by ihajji            #+#    #+#             */
+/*   Updated: 2025/02/18 10:36:11 by ihajji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 static int	print_error(void)
@@ -30,7 +42,7 @@ static int	print_julia_error(void)
 	return (FAILIURE);
 }
 
-static void parse_fractal(char *arg, t_data *data)
+static void	parse_fractal(char *arg, t_data *data)
 {
 	if (!ft_strcmp(arg, "mandelbrot"))
 		data->fractal = 'm';
@@ -42,25 +54,24 @@ static void parse_fractal(char *arg, t_data *data)
 		data->fractal = 'e';
 }
 
-static int parse_julia_params(char *p_re, char *p_im, t_data *data)
+static int	parse_julia_params(char *p_re, char *p_im, t_data *data)
 {
 	double	julia_re;
 	double	julia_im;
 
 	julia_re = ft_atof(p_re);
 	julia_im = ft_atof(p_im);
-
 	if (julia_im > 2.0 || julia_im < -2.0 || julia_re > 2.0 || julia_im < -2.0)
 		return (print_julia_error());
 	else
 	{
-		data->default_julia_params = (t_complex) {julia_re, julia_im};
+		data->default_julia_params = (t_complex){julia_re, julia_im};
 		data->julia_params = data->default_julia_params;
 	}
 	return (SUCCESS);
 }
 
-int parse_args(int ac, char **av, t_data *data)
+int	parse_args(int ac, char **av, t_data *data)
 {
 	if (ac == 1)
 		return (print_error());
@@ -77,10 +88,11 @@ int parse_args(int ac, char **av, t_data *data)
 	{
 		if (ac != 4)
 			return (print_error());
-		else if (ft_strisnum(av[2]) == FAILIURE || ft_strisnum(av[3]) == FAILIURE)
+		else if (ft_strisnum(av[2]) == FAILIURE
+			|| ft_strisnum(av[3]) == FAILIURE)
 			return (print_error());
 		else if (parse_julia_params(av[2], av[3], data) == FAILIURE)
-			return FAILIURE;
+			return (FAILIURE);
 	}
 	return (SUCCESS);
 }
