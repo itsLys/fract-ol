@@ -5,8 +5,7 @@ RESET  =	\033[0m
 
 NAME =		fractol
 CC =		cc
-FLAGS =		-Wall -Wextra -Werror -lmlx -lXext -lX11 -lm -Ofast -ggdb 
-# remove ggdb
+FLAGS =		-Wall -Wextra -Werror -lmlx -lXext -lX11 -lm -Ofast
 AR =		ar rcs
 INCLUDES =	-I./headers/ -I./libft/headers/
 LIBFT =		libft.a
@@ -40,7 +39,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) -c $< $(INCLUDES) $(FLAGS) -o $@
 
 $(LIBFT):
-	@make -C libft/ re
+	@make -C libft/ all
 	@cp libft/$(LIBFT) ./
 
 clean:
