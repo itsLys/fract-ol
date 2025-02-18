@@ -39,7 +39,7 @@ int	handle_keypress(int code, t_data *data)
 		|| code == XK_Down)
 		handle_move(code, data);
 	else if (code == XK_minus || code == XK_equal)
-		handle_zoom_and_iterations(code, data);
+		handle_zoom(code, data);
 	else if (code == XK_space)
 		reset_defaults(data);
 	else if (code == XK_c)
@@ -61,6 +61,6 @@ int	handle_button(int code, int x, int y, t_data *data)
 	(void) x;
 	(void) y;
 	if (code == 4 || code == 5)
-		handle_zoom_and_iterations(code, data);
+		handle_zoom(code, data);
 	return (0);
 }

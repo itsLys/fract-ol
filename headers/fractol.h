@@ -29,7 +29,7 @@ void	render_newton(t_data *data);
 void	render_custom(t_data *data);
 void	render_burningship(t_data *data);
 void	handle_move(int code, t_data *data);
-void	handle_zoom_and_iterations(int code, t_data *data);
+void	handle_zoom(int code, t_data *data);
 void	reset_defaults(t_data *data);
 void	change_color(t_data *data);
 void	change_fractal(int code, t_data *data);
