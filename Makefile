@@ -5,7 +5,8 @@ RESET  =	\033[0m
 
 NAME =		fractol
 CC =		cc
-FLAGS =		-Wall -Wextra -Werror -lmlx -lXext -lX11 -lm -Ofast
+CFLAGS =	-Wall -Wextra -Werror -Ofast
+LFLAGS =	-lmlx -lXext -lX11 -lm
 AR =		ar rcs
 INCLUDES =	-I./headers/ -I./libft/headers/
 LIBFT =		libft.a
@@ -28,27 +29,34 @@ OBJ =		$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
+bonus: $(NAME)
+
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) $(FLAGS) $(INCLUDES)
+	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) $(LFLAGS) $(INCLUDES)
 	@echo "$(GREEN)$(BOLD)$(NAME) done!$(RESET)"
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(YELLOW)compiling $<$(RESET)"
-	@$(CC) -c $< $(INCLUDES) $(FLAGS) -o $@
+	@$(CC) -c $< $(INCLUDES) $(CFLAGS) -o $@
 
 $(LIBFT):
 	@make -C libft/ all
-	@cp libft/$(LIBFT) ./
+	@cp -p libft/$(LIBFT) $(LIBFT)
 
 clean:
+	@make -C libft/ clean
 	@echo "$(RED)$(BOLD)Cleaning $(OBJ_DIR)...$(RESET)"
-	@make -C libft/ fclean
 	@rm -rf $(OBJ_DIR)
 
 fclean: clean
+	@make -C libft/ fclean
 	@echo "$(RED)$(BOLD)Cleaning $(NAME)...$(RESET)"
 	@rm -f $(NAME) $(LIBFT)
 
 re: fclean all
+
+.PHONY: all bonus clean fclean re
+
+.SECONDARY: $(OBJ) $(LIBFT)
